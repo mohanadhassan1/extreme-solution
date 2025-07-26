@@ -28,41 +28,51 @@ A Next.js 15 application that fetches and displays GitHub users with pagination,
 
 
 extreme-solutions/
+├── __tests__/
+│   ├── favoritesSlice.test.ts
+│   ├── UserCard.test.tsx
+│   └── UsersList.test.tsx
 ├── app/
 │   ├── favorites/
 │   │   └── page.tsx
 │   ├── globals.css
 │   ├── layout.tsx
-│   ├── page.tsx
-│   └── providers.tsx
+│   └── page.tsx
 ├── components/
-│   ├── DarkModeToggle.tsx
+│   ├── ErrorBanner.tsx
 │   ├── FavoriteButton.tsx
+│   ├── Loading.tsx
 │   ├── PaginationControls.tsx
 │   ├── SearchInput.tsx
 │   ├── UserCard.tsx
 │   └── UsersList.tsx
+├── enums/
+│   └── index.ts
 ├── hooks/
+│   ├── index.ts
 │   ├── useDebounce.ts
-│   └── useLocalStorage.ts
+│   └── useTheme.tsx
 ├── lib/
 │   ├── api.ts
+│   ├── index.ts
+│   └── Notifications.tsx
+│   └── ThemeProvider.tsx
 │   └── constants.ts
 ├── store/
-│   ├── favoritesSlice.ts
+│   ├── slices/
+│   │    └── favoritesSlice.ts
+│   ├── providers.tsx
 │   └── store.ts
 ├── types/
 │   └── user.ts
-├── README.md
+├── .gitignore
+├── babel.setup.js
+├── eslint.config.js
 ├── jest.config.js
+├── jest.setup.ts
 ├── next.config.js
+├── package-lock.json
 ├── package.json
+├── postcss.config.json
+├── README.md
 └── tsconfig.json
-
-
-
-
-
-npm install @reduxjs/toolkit react-redux redux-persist
-npm install --save-dev @testing-library/jest-dom @testing-library/react @testing-library/user-event @types/jest jest jest-environment-jsdom ts-jest
-

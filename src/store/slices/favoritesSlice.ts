@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { User } from '@/types/user';
 import { showToast } from '@/lib/Notifications';
 import { TOAST_TYPES } from '@/enums';
@@ -32,4 +32,4 @@ const favoritesSlice = createSlice({
 });
 
 export const { addFavorite, removeFavorite } = favoritesSlice.actions;
-export default favoritesSlice.reducer;
+export default favoritesSlice.reducer as Reducer<FavoritesState>;

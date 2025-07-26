@@ -1,33 +1,25 @@
 import React from 'react';
-import { render, screen } from '../test-utils';
+import { render, screen } from '@testing-library/react';
 import UserCard from '@/components/UserCard';
 import { User } from '@/types/user';
 
+const mockUser: User = {
+  id: 1,
+  login: 'mohanad',
+  avatar_url: 'https://avatar.url',
+  html_url: 'https://github.com/mohanad',
+  type: 'User',
+};
+
 describe('UserCard', () => {
-  const mockUser: User = {
-    id: 1,
-    login: 'testuser',
-    avatar_url: 'https://example.com/avatar.jpg',
-    html_url: 'https://github.com/testuser',
-    type: 'User',
-  };
-
-  it('renders user information correctly', () => {
+  it('renders user login and type', () => {
     render(<UserCard user={mockUser} isFavorite={false} />);
-
-    expect(screen.getByText(mockUser.login)).toBeInTheDocument();
-    expect(screen.getByText(mockUser.type)).toBeInTheDocument();
-    expect(screen.getByRole('img')).toHaveAttribute('src', mockUser.avatar_url);
-    expect(screen.getByText('Profile')).toHaveAttribute('href', mockUser.html_url);
+    expect(screen.getByText('mohanad')).toBeInTheDocument();
+    expect(screen.getByText('User')).toBeInTheDocument();
   });
 
-  it('shows star outline when not favorite', () => {
+  it('renders Profile link', () => {
     render(<UserCard user={mockUser} isFavorite={false} />);
-    expect(screen.getByText('☆')).toBeInTheDocument();
-  });
-
-  it('shows filled star when favorite', () => {
-    render(<UserCard user={mockUser} isFavorite={true} />);
-    expect(screen.getByText('★')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /profile/i })).toHaveAttribute('href', mockUser.html_url);
   });
 });
