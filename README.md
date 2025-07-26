@@ -1,44 +1,60 @@
 # Extreme Solution Hiring Challenge
 
-A user-friendly dashboard built with **Next.js 15**, **Tailwind CSS**, and **Redux Toolkit** to manage users, favorites, and application state efficiently.
+A simple and responsive GitHub user browser built with **Next.js 15**, **Tailwind CSS**, and **Redux Toolkit**. It includes features like pagination, search, favorites management, theme toggle, and persistence — all powered by GitHub’s public API.
 
 ---
 
-## 📦 Setup Instructions
+## 🧠 Challenge Overview
 
-### 1. Clone the repository
+This project was built as part of a hiring challenge to demonstrate the following:
+
+- Fetch and display GitHub users using [GitHub's public API](https://api.github.com/users)
+- Implement pagination (Next, Previous, First, Last)
+- Enable search within fetched data
+- Add/remove users to/from a favorites list
+- Persist favorites with localStorage or Redux-persist
+- Create a dedicated `/favorites` page
+- Implement routing and global state management
+- Provide a responsive and user-friendly UI
+
+---
+
+## 🔧 Tech Stack
+
+| Tech             | Description                          |
+|------------------|--------------------------------------|
+| **Next.js 15**    | React framework with App Router     |
+| **TypeScript**    | Static type checking                |
+| **Redux Toolkit** | Global state management + persistence |
+| **Tailwind CSS**  | Utility-first styling               |
+| **Jest**          | Unit testing                        |
+| **GitHub API**    | Public API to fetch users           |
+
+---
+
+## ✨ Features
+
+- ✅ Paginated list of GitHub users (5 per page)
+- ✅ Search within fetched users (debounced)
+- ✅ Add/remove users from favorites
+- ✅ View favorites on `/favorites` page
+- ✅ Persistent data using localStorage
+- ✅ Dark mode support
+- ✅ Clean, responsive UI
+- ✅ Error and loading handling
+- ✅ Modular and testable code
+- ✅ Unit tests using Jest
+
+---
+
+## 📁 Project Structure
 
 ```bash
-git clone https://github.com/mohanadhassan1/extreme-solution.git
-cd extreme-solution
-```
-
-## Features
-
-- Fetch and display GitHub users with pagination
-- Search within fetched data
-- Add/remove users to/from favorites
-- Favorites persist across page reloads
-- Dark mode support
-- Responsive design
-
-## Technologies
-
-- Next.js 15
-- TypeScript
-- Redux Toolkit with persistence
-- Tailwind CSS
-- GitHub API
-
-## Setup
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-
-
 extreme-solutions/
+├── __mocks__/
+│   ├── favoritesSlice.test.ts
+│   ├── UserCard.test.tsx
+│   └── styleMock.js
 ├── __tests__/
 │   ├── favoritesSlice.test.ts
 │   ├── UserCard.test.tsx
@@ -87,3 +103,24 @@ extreme-solutions/
 ├── postcss.config.json
 ├── README.md
 └── tsconfig.json
+```
+
+---
+
+## 📦 Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/mohanadhassan1/extreme-solution.git
+cd extreme-solution
+```
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+
+
