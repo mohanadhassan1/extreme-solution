@@ -9,6 +9,7 @@ import PaginationControls from '../components/PaginationControls';
 import SearchInput from '../components/SearchInput';
 import DarkModeToggle from '../components/DarkModeToggle';
 import { RootState } from '../store/store';
+import Link from 'next/link';
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
@@ -76,7 +77,10 @@ export default function Home() {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">GitHub Users Explorer</h1>
-          <DarkModeToggle />
+          <div className='flex flex-row items-center justify-center gap-8'>
+            <Link href='/favorites' className=''>Favorites</Link>
+            <DarkModeToggle />
+          </div>
         </div>
         
         <SearchInput onSearch={handleSearch} />

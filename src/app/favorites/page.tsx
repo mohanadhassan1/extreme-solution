@@ -3,7 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import UsersList from '../../components/UsersList';
+import UsersList from '@/components/UsersList';
 import Link from 'next/link';
 import DarkModeToggle from '../../components/DarkModeToggle';
 

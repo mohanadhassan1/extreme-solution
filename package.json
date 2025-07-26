@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
@@ -30,6 +32,7 @@
     "eslint-config-next": "15.4.3",
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
+    "redux": "^5.0.1",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.0",
     "typescript": "^5"
