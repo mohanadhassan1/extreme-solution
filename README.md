@@ -1,6 +1,17 @@
-# GitHub Users Explorer
+# Extreme Solution Hiring Challenge
 
-A Next.js 15 application that fetches and displays GitHub users with pagination, search, and favorites functionality.
+A user-friendly dashboard built with **Next.js 15**, **Tailwind CSS**, and **Redux Toolkit** to manage users, favorites, and application state efficiently.
+
+---
+
+## 📦 Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/mohanadhassan1/extreme-solution.git
+cd extreme-solution
+```
 
 ## Features
 

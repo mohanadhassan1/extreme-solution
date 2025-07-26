@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { fetchUsers, searchUsers } from '@/lib/api';
 import { User } from '@/types/user';
 import UsersList from '@/components/UsersList';
@@ -24,7 +24,6 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   
   const favorites = useSelector((state: RootState) => state.favorites.users);
-  const dispatch = useDispatch();
   const { theme, toggleTheme } = useTheme();
 
 
@@ -67,28 +66,7 @@ export default function Home() {
 
   const handleRetry = () => {
     setError(null);
-    loadUsers(); // You'll need to move loadUsers outside the useEffect or reuse it
   };
-
-  const loadUsers = async () => {
-    try {
-      setIsLoading(true);
-      const { data, totalPages } = await fetchUsers(currentPage, 10);
-      setUsers(data);
-      setFilteredUsers(data);
-      setTotalPages(totalPages);
-      setError(null);
-    } catch (err) {
-      setError('Failed to fetch users. Please try again later.');
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadUsers();
-  }, [currentPage]);
 
   return (
     <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
