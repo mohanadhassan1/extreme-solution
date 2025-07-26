@@ -1,8 +1,8 @@
 import React from 'react';
 import { User } from '../types/user';
-import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite, removeFavorite } from '../store/favoritesSlice';
-import { RootState } from '../store/store';
+import { useDispatch } from 'react-redux';
+import { addFavorite, removeFavorite } from '@/store/slices/favoritesSlice';
+import { Star } from 'lucide-react';
 
 interface FavoriteButtonProps {
   user: User;
@@ -26,11 +26,10 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ user, isFavorite }) => 
       className={`p-2 rounded-full ${isFavorite ? 'text-yellow-500' : 'text-gray-400'} hover:text-yellow-500 transition-colors`}
       aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
     >
-      {isFavorite ? (
-        <span className="text-2xl">★</span>
-      ) : (
-        <span className="text-2xl">☆</span>
-      )}
+      <Star
+        className="h-5 w-5" 
+        fill={isFavorite ? 'currentColor' : 'none'} 
+      />
     </button>
   );
 };

@@ -7,10 +7,12 @@ import { User } from '@/types/user';
 import UsersList from '@/components/UsersList';
 import PaginationControls from '@/components/PaginationControls';
 import SearchInput from '@/components/SearchInput';
-import DarkModeToggle from '@/components/DarkModeToggle';
 import { RootState } from '@/store/store';
 import Link from 'next/link';
-import { Heart } from 'lucide-react';
+import { Heart, Moon, Sun } from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
+import Loading from '@/components/Loading';
+import ErrorBanner from '@/components/ErrorBanner';
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
@@ -23,6 +25,8 @@ export default function Home() {
   
   const favorites = useSelector((state: RootState) => state.favorites.users);
   const dispatch = useDispatch();
+  const { theme, toggleTheme } = useTheme();
+
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -61,23 +65,36 @@ export default function Home() {
     setSearchQuery(query);
   };
 
-  if (error) {
-    return (
-      <div className="min-h-screen p-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-            <p>{error}</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleRetry = () => {
+    setError(null);
+    loadUsers(); // You'll need to move loadUsers outside the useEffect or reuse it
+  };
+
+  const loadUsers = async () => {
+    try {
+      setIsLoading(true);
+      const { data, totalPages } = await fetchUsers(currentPage, 10);
+      setUsers(data);
+      setFilteredUsers(data);
+      setTotalPages(totalPages);
+      setError(null);
+    } catch (err) {
+      setError('Failed to fetch users. Please try again later.');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, [currentPage]);
 
   return (
     <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">GitHub Users Explorer</h1>
+          <Link href='/' className="text-3xl font-bold text-gray-900 dark:text-white">GitHub Users</Link>
           <div className='flex flex-row items-center justify-center gap-8'>
             <Link href='/favorites' className='relative group flex flex-col items-center'>
               <div className='relative'>
@@ -115,16 +132,21 @@ export default function Home() {
                 Favorites
               </span>
             </Link>
-            <DarkModeToggle />
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
           </div>
         </div>
         
         <SearchInput onSearch={handleSearch} />
         
         {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          </div>
+          <Loading />
+        ) : error ? (
+          <ErrorBanner message={error} onRetry={handleRetry} />
         ) : (
           <>
             <UsersList 

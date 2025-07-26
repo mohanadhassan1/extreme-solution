@@ -1,15 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import UsersList from '@/components/UsersList';
 import Link from 'next/link';
-import DarkModeToggle from '../../components/DarkModeToggle';
+import Loading from '@/components/Loading';
 
 const FavoritesPage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const favorites = useSelector((state: RootState) => state.favorites.users);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) return <Loading />;
   return (
     <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto">
@@ -20,7 +27,6 @@ const FavoritesPage: React.FC = () => {
             </Link>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Favorite Users</h1>
           </div>
-          <DarkModeToggle />
         </div>
         
         {favorites.length === 0 ? (
@@ -31,7 +37,7 @@ const FavoritesPage: React.FC = () => {
           <UsersList 
             users={favorites} 
             favorites={favorites} 
-            showFavoriteButton={false}
+            loading={false}
           />
         )}
       </div>

@@ -1,18 +1,20 @@
 import React from 'react';
 import { User } from '../types/user';
 import UserCard from './UserCard';
+import Loading from './Loading';
 
 interface UsersListProps {
   users: User[];
   favorites: User[];
-  showFavoriteButton?: boolean;
+  loading?: boolean;
 }
 
 const UsersList: React.FC<UsersListProps> = ({ 
   users, 
   favorites,
-  showFavoriteButton = true 
+  loading = false
 }) => {
+  if (loading) return <Loading />;
   return (
     <div className="space-y-4">
       {users.length === 0 ? (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../types/user';
 import FavoriteButton from './FavoriteButton';
+import Image from 'next/image';
 
 interface UserCardProps {
   user: User;
@@ -11,9 +12,11 @@ const UserCard: React.FC<UserCardProps> = ({ user, isFavorite }) => {
   return (
     <div className="flex items-center justify-between p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center space-x-4">
-        <img 
-          src={user.avatar_url} 
+        <Image
+          src={user?.avatar_url} 
           alt={user.login} 
+          width={100}
+          height={100}
           className="w-12 h-12 rounded-full"
         />
         <div>
