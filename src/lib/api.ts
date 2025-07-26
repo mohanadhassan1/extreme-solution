@@ -1,4 +1,4 @@
-import { User, UsersResponse } from '../types/user';
+import { User, UsersResponse } from '@/types/user';
 
 const API_BASE_URL = 'https://api.github.com';
 
@@ -12,7 +12,7 @@ export const fetchUsers = async (page: number = 1, perPage: number = 10): Promis
     
     const data = await response.json();
     const linkHeader = response.headers.get('link');
-    let totalPages = page;
+    let totalPages = 3;
     
     if (linkHeader) {
       const lastLink = linkHeader.split(',').find(link => link.includes('rel="last"'));

@@ -2,14 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, searchUsers } from '../lib/api';
-import { User } from '../types/user';
-import UsersList from '../components/UsersList';
-import PaginationControls from '../components/PaginationControls';
-import SearchInput from '../components/SearchInput';
-import DarkModeToggle from '../components/DarkModeToggle';
-import { RootState } from '../store/store';
+import { fetchUsers, searchUsers } from '@/lib/api';
+import { User } from '@/types/user';
+import UsersList from '@/components/UsersList';
+import PaginationControls from '@/components/PaginationControls';
+import SearchInput from '@/components/SearchInput';
+import DarkModeToggle from '@/components/DarkModeToggle';
+import { RootState } from '@/store/store';
 import Link from 'next/link';
+import { Heart } from 'lucide-react';
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
@@ -78,7 +79,42 @@ export default function Home() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">GitHub Users Explorer</h1>
           <div className='flex flex-row items-center justify-center gap-8'>
-            <Link href='/favorites' className=''>Favorites</Link>
+            <Link href='/favorites' className='relative group flex flex-col items-center'>
+              <div className='relative'>
+                <Heart 
+                  className={`
+                    h-6 w-6 
+                    transition-all duration-300 
+                    ${favorites.length > 0 
+                      ? 'fill-red-500 text-red-500' 
+                      : 'text-gray-400 dark:text-gray-500'
+                    }
+                    group-hover:scale-110
+                  `}
+                />
+                
+                {favorites.length > 0 && (
+                  <div className='
+                    absolute -top-2 -right-2
+                    bg-red-500 text-white
+                    rounded-full w-5 h-5
+                    flex items-center justify-center
+                    text-xs font-medium
+                    animate-pulse
+                  '>
+                    {favorites.length}
+                  </div>
+                )}
+              </div>
+              <span className='
+                text-xs mt-1
+                text-gray-500 dark:text-gray-400
+                group-hover:text-gray-700 dark:group-hover:text-gray-200
+                transition-colors
+              '>
+                Favorites
+              </span>
+            </Link>
             <DarkModeToggle />
           </div>
         </div>
